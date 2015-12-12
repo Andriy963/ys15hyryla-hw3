@@ -34,7 +34,7 @@ public class AsIntStream implements IntStream {
             else if (current instanceof IntUnaryOperator) {
                 doMap((IntUnaryOperator) current);
             }
-            else if (current instanceof IntToIntStreamFunction) {
+            else {
                 doFlatMap((IntToIntStreamFunction) current);
             }
         }
@@ -78,12 +78,7 @@ public class AsIntStream implements IntStream {
         if (values.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        int sum = 0;
-        Iterator<Integer> iterator = values.iterator();
-        while (iterator.hasNext()) {
-            sum += iterator.next();
-        }
-        return (double) sum / (double) values.size();
+        return (double) sum() / (double) values.size();
     }
 
     @Override
@@ -96,7 +91,9 @@ public class AsIntStream implements IntStream {
         Iterator<Integer> iterator = values.iterator();
         while (iterator.hasNext()) {
             int current = iterator.next();
-            maxV = current > maxV ? current : maxV;
+            if (current > maxV) {
+                maxV = current;
+            }
         }
         return maxV;
     }
@@ -111,7 +108,9 @@ public class AsIntStream implements IntStream {
         Iterator<Integer> iterator = values.iterator();
         while (iterator.hasNext()) {
             int current = iterator.next();
-            minV = current < minV ? current : minV;
+            if (current < minV) {
+                minV = current;
+            }
         }
         return minV;
     }

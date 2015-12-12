@@ -88,9 +88,9 @@ public class AsIntStream implements IntStream {
             throw new IllegalArgumentException();
         }
         int maxV = Integer.MIN_VALUE;
-        Iterator<Integer> iterator = values.iterator();
-        while (iterator.hasNext()) {
-            int current = iterator.next();
+        Iterator<Integer> iter = values.iterator();
+        while (iter.hasNext()) {
+            int current = iter.next();
             if (current > maxV) {
                 maxV = current;
             }
